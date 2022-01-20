@@ -1,0 +1,79 @@
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-image: url('img/10.keyboard/cactus-bg.png');
+    background-position: center;
+}
+
+button {
+    position: fixed;
+    top: 100px;
+    right: 160px;
+    font-size: 40px;
+    background-color: beige;
+    border: transparent;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: 'Wendy One';
+}
+
+canvas {
+    background: black;
+}
+
+h2 {
+    margin: 0;
+    font-family: 'Wendy One', sans-serif;
+    padding: 10px;
+    font-size: 25px;
+}
+
+h1 {
+    margin: 0;
+    font-family: 'Wendy One', sans-serif;
+    padding: 10px;
+    font-size: 52px;
+}
+
+span {
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 25px;
+}
+
+#start {
+    width: 720px;
+    height: 480px;
+}
+
+.d-none {
+    display: none;
+}
+
+.key {
+    width: 60px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.left {
+    margin-left: 23px;
+}
+
+.instruction-container {
+    display: flex;
+    align-items: center;
+}
+
+.instruction-box {
+    position: fixed;
+    right: 150px;
+    top: 200px;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

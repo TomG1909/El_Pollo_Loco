@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Wendy+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="models/drawable-object.class.js"></script>
+    <script src="models/startscreen.class.js"></script>
+    <script src="models/movable-object.class.js"></script>
+    <script src="models/throwable-object.class.js"></script>
+    <script src="models/character.class.js"></script>
+    <script src="models/collectible-bottle.class.js"></script>
+    <script src="models/collectible-coins.class.js"></script>
+
+    <script src="models/chicken.class.js"></script>
+    <script src="models/cloud.class.js"></script>
+    <script src="models/status-bar.class.js"></script>
+    <script src="models/status-bar-bottles.class.js"></script>
+    <script src="models/status-bar-coins.class.js"></script>
+    <script src="models/world.class.js"></script>
+    <script src="models/background-object.class.js"></script>
+    <script src="models/keybord.class.js"></script>
+    <script src="models/level.class.js"></script>
+    <script src="models/endboss.class.js"></script>
+    <script src="levels/level1.js"></script>
+    <script src="js/game.js"></script>
+    <script src="models/endscreen.class.js"></script>
+
+    <title>El Pollo Loco</title>
+</head>
+
+<body onload="init()">
+    <h1>El Pollo Loco</h1>
+    <div><button onclick="startGame()">Start</button></div>
+
+    <div><img src="img/9.Intro _ Outro Image/Start Screen/Opción 1.png" id="start"></div>
+    <canvas id="canvas" width="720" height="480" class="d-none">
+
+    </canvas>
+    <div class="instruction-box">
+        <div>
+            <div class="flex-center">
+                <span>Move right =</span>
+                <img src="img/10.keyboard/arrow-key-right.png" class="key">
+            </div>
+            <div class="flex-center">
+                <span>Move left =</span>
+                <img src="img/10.keyboard/arrow-key-left.png" class="key left">
+            </div>
+        </div>
+        <div>
+            <div class="instruction-container">
+                <span>Throw =</span>
+                <h2>D</h2>
+            </div>
+            <div class="instruction-container">
+                <span>Jump =</span>
+                <h2>SPACE</h2>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
