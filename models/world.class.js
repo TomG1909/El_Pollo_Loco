@@ -9,9 +9,12 @@ class World {
     statusBar = new StatusBar();
     statusBarBottles = new StatusBarBottles();
     statusBarCoins = new StatusBarCoins();
+    statusBarEnemy = new StatusBarEnemy()
     throwableObjects = [];
     endscreen = new Endscreen();
     EnemyIsAlive = true;
+    endboss = new Endboss();
+    iconEnemyBar = new IconEnemyBar();
 
 
 
@@ -23,9 +26,8 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
         this.run();
-        this.checkCollectedItems();
+
     }
 
     setWorld() {
@@ -38,8 +40,10 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
-            this.checkCollectedItems();
+            this.checkCollectedBottles();
+            this.checkCollectedCoins();
             this.checkCollisionsEnemies();
+            this.hurtBoss();
         }, 200);
     }
 
@@ -50,6 +54,7 @@ class World {
             this.character.collectedBottles -= 1;
             this.statusBarBottles.setPercentage(this.character.collectedBottles);
             console.log('my bottles', this.character.collectedBottles);
+
         }
     }
 
@@ -67,7 +72,7 @@ class World {
     }
     checkCollisionsEnemies() {
 
-        this.level.enemies.forEach(enemy => {
+        this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
                 this.EnemyIsAlive = false;
                 enemy.hit();
@@ -76,8 +81,20 @@ class World {
             }
         });
     }
+    hurtBoss() {
+        this.throwableObjects.forEach((bottle) => {
+            if (this.endboss.isColliding(bottle)) {
+                this.endboss.hit();
+                this.statusBarEnemy.setPercentage(this.endboss.energy);
+                console.log('Boss energy', this.endboss.energy);
 
-    checkCollectedItems() {
+            }
+
+        });
+    }
+
+
+    checkCollectedBottles() {
 
         this.level.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
@@ -90,7 +107,8 @@ class World {
 
 
         });
-
+    }
+    checkCollectedCoins() {
         this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin) && this.character.isAboveGround()) {
                 this.character.countCoins();
@@ -128,9 +146,18 @@ class World {
             this.addToMap(this.statusBarBottles);
             this.ctx.translate(this.camera_x, 0);
 
+            this.ctx.translate(-this.camera_x, 0);
+            this.addToMap(this.statusBarEnemy);
+            this.ctx.translate(this.camera_x, 0);
+
+            this.ctx.translate(-this.camera_x, 0);
+            this.addToMap(this.iconEnemyBar);
+            this.ctx.translate(this.camera_x, 0);
+
 
             this.addObjectsToMap(this.level.bottles);
             this.addObjectsToMap(this.level.enemies);
+            this.addObjectsToMap(this.level.endboss);
             this.addObjectsToMap(this.level.clouds);
             this.addObjectsToMap(this.level.coins);
             this.addToMap(this.character);

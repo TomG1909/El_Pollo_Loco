@@ -13,8 +13,8 @@ class StatusBarCoins extends DrawableObject {
 
     constructor() {
         super().loadImage('img/7.Marcadores/Barra/Marcador moneda/azul/0_.png'); //Methoden von übergeordneten Objekt aufrufen
-        this.x = 400;
-        this.y = 0;
+        this.x = 0;
+        this.y = 80;
         this.width = 180;
         this.height = 50;
         this.loadImages(this.IMAGES_COINS);
@@ -40,7 +40,7 @@ class StatusBarCoins extends DrawableObject {
             return 2;
         } else if (this.percentage < 2) {
             return 1;
-        } else if (this.percentage == 0) {
+        } else if (this.percentage < 0) {
             return 0;
         };
     }

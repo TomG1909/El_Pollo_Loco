@@ -3,6 +3,8 @@ const level1 = new Level(
         new Chicken(),
         new Chicken(),
         new Chicken(),
+
+    ], [
         new Endboss(),
     ], [
         new Cloud(),
@@ -16,12 +18,8 @@ const level1 = new Level(
         new Coins(100, 200),
         new Coins(90, 250),
         new Coins(100, 350),
-        new Coins(80, 330),
-        new Coins(70, 500),
-        new Coins(100, 400),
-        new Coins(90, 450),
-        new Coins(100, 550),
-        new Coins(80, 530)
+        new Coins(80, 330)
+
     ], [
         new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', -719),
         new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/2.png', -719),

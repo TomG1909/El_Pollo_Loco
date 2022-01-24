@@ -13,8 +13,8 @@ class StatusBarBottles extends DrawableObject {
 
     constructor() {
         super().loadImage('img/7.Marcadores/Barra/Marcador_botella/Azul/0_.png'); //Methoden von übergeordneten Objekt aufrufen
-        this.x = 200;
-        this.y = 0;
+        this.x = 0;
+        this.y = 40;
         this.width = 180;
         this.height = 50;
         this.loadImages(this.IMAGES_BOTTLE_BAR);
@@ -40,7 +40,7 @@ class StatusBarBottles extends DrawableObject {
             return 2;
         } else if (this.percentage == 1) {
             return 1;
-        } else if (this.percentage == 0) {
+        } else {
             return 0;
         };
     }
