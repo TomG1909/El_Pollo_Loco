@@ -13,8 +13,9 @@ class World {
     throwableObjects = [];
     endscreen = new Endscreen();
     EnemyIsAlive = true;
-    endboss = new Endboss();
+    endboss = level1.endboss[0];
     iconEnemyBar = new IconEnemyBar();
+
 
 
 
@@ -44,11 +45,12 @@ class World {
             this.checkCollectedCoins();
             this.checkCollisionsEnemies();
             this.hurtBoss();
+
         }, 200);
     }
 
     checkThrowObjects() {
-        if (this.keyboard.D && this.character.collectedBottles > 0) {
+        if (this.keyboard.D && this.character.collectedBottles > 0 && !this.endboss.isHurt()) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 120);
             this.throwableObjects.push(bottle);
             this.character.collectedBottles -= 1;
@@ -83,7 +85,7 @@ class World {
     }
     hurtBoss() {
         this.throwableObjects.forEach((bottle) => {
-            if (this.endboss.isColliding(bottle)) {
+            if (this.endboss.isColliding(bottle) && !this.endboss.isHurt()) {
                 this.endboss.hit();
                 this.statusBarEnemy.setPercentage(this.endboss.energy);
                 console.log('Boss energy', this.endboss.energy);
@@ -124,6 +126,7 @@ class World {
 
 
 
+
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -145,15 +148,15 @@ class World {
             this.ctx.translate(-this.camera_x, 0);
             this.addToMap(this.statusBarBottles);
             this.ctx.translate(this.camera_x, 0);
+            if (this.character.x > 1400) {
+                this.ctx.translate(-this.camera_x, 0);
+                this.addToMap(this.statusBarEnemy);
+                this.ctx.translate(this.camera_x, 0);
 
-            this.ctx.translate(-this.camera_x, 0);
-            this.addToMap(this.statusBarEnemy);
-            this.ctx.translate(this.camera_x, 0);
-
-            this.ctx.translate(-this.camera_x, 0);
-            this.addToMap(this.iconEnemyBar);
-            this.ctx.translate(this.camera_x, 0);
-
+                this.ctx.translate(-this.camera_x, 0);
+                this.addToMap(this.iconEnemyBar);
+                this.ctx.translate(this.camera_x, 0);
+            }
 
             this.addObjectsToMap(this.level.bottles);
             this.addObjectsToMap(this.level.enemies);

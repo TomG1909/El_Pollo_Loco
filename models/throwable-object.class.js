@@ -1,5 +1,5 @@
 class ThrowableObject extends MovableObject {
-
+    lastThrow = 0;
     IMAGES_BOTTLE = [
 
         'img/6.botella/Rotación/Mesa de trabajo 1 copia 3.png',
@@ -31,6 +31,12 @@ class ThrowableObject extends MovableObject {
         setInterval(() => {
             this.x += 10;
         }, 25);
+    }
+    lastThrow() {
+        let timepassed = new Date().getTime() - this.lastThrow; // Difference in ms
+        timepassed = timepassed / 1000; // Difference in s
+        return timepassed < 3;
+
     }
 
     animate() {

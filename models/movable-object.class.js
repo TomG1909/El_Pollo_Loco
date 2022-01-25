@@ -51,7 +51,7 @@ class MovableObject extends DrawableObject {
 
         let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
         timepassed = timepassed / 1000; // Difference in s
-        return timepassed < 5;
+        return timepassed < 2;
 
 
     }

@@ -3,6 +3,7 @@ class Character extends MovableObject {
     width = 200;
     height = 320;
     speed = 10;
+
     IMAGES_WALKING = [
 
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png',
