@@ -5,7 +5,11 @@ class ThrowableObject extends MovableObject {
         'img/6.botella/Rotación/Mesa de trabajo 1 copia 3.png',
         'img/6.botella/Rotación/Mesa de trabajo 1 copia 4.png',
         'img/6.botella/Rotación/Mesa de trabajo 1 copia 5.png',
-        'img/6.botella/Rotación/Mesa de trabajo 1 copia 6.png'
+        'img/6.botella/Rotación/Mesa de trabajo 1 copia 6.png',
+        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 7.png',
+        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 8.png',
+        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 9.png'
+
 
     ]
 
@@ -32,12 +36,7 @@ class ThrowableObject extends MovableObject {
             this.x += 10;
         }, 25);
     }
-    lastThrow() {
-        let timepassed = new Date().getTime() - this.lastThrow; // Difference in ms
-        timepassed = timepassed / 1000; // Difference in s
-        return timepassed < 3;
 
-    }
 
     animate() {
 
@@ -48,6 +47,6 @@ class ThrowableObject extends MovableObject {
                 this.playAnimation(this.IMAGES_BOTTLE);
             }
 
-        }, 100)
+        }, 160)
     }
 }

@@ -10,6 +10,7 @@ class MovableObject extends DrawableObject {
     coins = 0;
 
 
+
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -25,8 +26,6 @@ class MovableObject extends DrawableObject {
         } else
             return this.y < 110;
     }
-
-
 
 
 
@@ -61,12 +60,13 @@ class MovableObject extends DrawableObject {
         return this.energy == 0;
 
 
+
     }
 
     countBottles() {
 
-        if (this.collectedBottles > 5) {
-            this.collectedBottles = 5;
+        if (this.collectedBottles > 6) {
+            this.collectedBottles = 6;
 
         } else {
             this.collectedBottles += 1;
@@ -76,8 +76,8 @@ class MovableObject extends DrawableObject {
 
     countCoins() {
 
-        if (this.coins > 10) {
-            this.coins = 10;
+        if (this.coins > 20) {
+            this.coins = 20;
         } else {
             this.coins += 1;
 

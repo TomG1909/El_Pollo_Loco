@@ -3,8 +3,9 @@ class Endboss extends MovableObject {
     height = 500;
     width = 300;
     y = -45;
-    energy = 10;
+    energy = 12;
     lastHit = 0;
+    bossDefeatedAt = 0;
     IMAGES_WALKING = [
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/1.Alerta/G5.png',
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/1.Alerta/G6.png',
@@ -37,7 +38,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
 
-        this.x = 2000;
+        this.x = 4800;
         this.animate();
     }
 
@@ -45,15 +46,17 @@ class Endboss extends MovableObject {
     animate() {
 
 
-
-
         setInterval(() => {
 
             if (this.isDead()) {
+                this.bossDefeatedAt = new Date().getTime();
                 this.playAnimation(this.IMAGES_DEAD);
+                if (this.bossDefeatedAt > 0) {
+                    let timepassed = new Date().getTime() - this.bossDefeatedAt
+                    this.y = this.y + timepassed + 50
 
-            }
-            if (this.isHurt()) {
+                }
+            } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else {
                 this.playAnimation(this.IMAGES_WALKING);
