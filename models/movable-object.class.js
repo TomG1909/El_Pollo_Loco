@@ -11,6 +11,7 @@ class MovableObject extends DrawableObject {
 
 
 
+
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -21,7 +22,7 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        if (this instanceof ThrowableObject) {
+        if (this instanceof ThrowableObject || this instanceof ThrowableChicken) {
             return true;
         } else
             return this.y < 110;
@@ -39,21 +40,34 @@ class MovableObject extends DrawableObject {
 
     hit() {
         this.energy -= 2;
-        if (this.energy < 0) {
+        if (this.energy <= 0) {
             this.energy = 0;
+            this.diedAt = 0;
+            if (this.diedAt == 0) {
+                this.diedAt = Date.now();
+            }
         } else {
             this.lastHit = new Date().getTime();
         }
-    }
 
+        console.log(this.diedAt)
+    }
+    passedTimeDeath() {
+        let timepassed = new Date().getTime() - this.diedAt;
+        timepassed = timepassed / 1000; // Difference in s
+        return timepassed > 2;
+
+    }
     isHurt() {
 
         let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
         timepassed = timepassed / 1000; // Difference in s
-        return timepassed < 2;
+        return timepassed < 0.5;
 
 
     }
+
+
 
 
     isDead() {

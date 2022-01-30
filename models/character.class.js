@@ -96,7 +96,7 @@ class Character extends MovableObject {
             if (this.isDead()) {
 
                 this.playAnimation(this.IMAGES_DEAD) && this.loadImage('img/9.Intro _ Outro Image/_Game over_ screen/1.you lost.png');
-
+                document.getElementById('btn-replay').classList.remove('d-none')
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
 

@@ -1,5 +1,5 @@
 class ThrowableObject extends MovableObject {
-    lastThrow = 0;
+
     IMAGES_BOTTLE = [
 
         'img/6.botella/Rotación/Mesa de trabajo 1 copia 3.png',
@@ -37,7 +37,6 @@ class ThrowableObject extends MovableObject {
         }, 25);
     }
 
-
     animate() {
 
         setInterval(() => {
@@ -48,5 +47,54 @@ class ThrowableObject extends MovableObject {
             }
 
         }, 160)
+    }
+}
+
+class ThrowableChicken extends MovableObject {
+    IMAGES_CHICKEN = [
+
+        'img/3.Secuencias_Enemy_básico/Versión_pollito/1.Paso_derecho.png',
+        'img/3.Secuencias_Enemy_básico/Versión_pollito/2.Centro.png',
+        'img/3.Secuencias_Enemy_básico/Versión_pollito/3.Paso_izquierdo.png'
+
+    ]
+
+    constructor(x, y) {
+        super().loadImage('img/3.Secuencias_Enemy_básico/Versión_pollito/1.Paso_derecho.png')
+        this.loadImages(this.IMAGES_CHICKEN)
+
+        this.x = x;
+        this.y = y;
+        this.height = 40;
+        this.width = 40;
+
+        this.throw();
+        this.animate();
+
+
+
+
+    }
+
+    throw () {
+
+        this.speedY = 5;
+        this.applyGravity();
+        setInterval(() => {
+            this.x -= 10;
+        }, 25);
+    }
+
+    animate() {
+
+        setInterval(() => {
+
+            if (this.throw) {
+
+                this.playAnimation(this.IMAGES_CHICKEN);
+            }
+
+
+        }, 260)
     }
 }

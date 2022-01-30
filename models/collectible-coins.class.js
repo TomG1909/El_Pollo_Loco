@@ -1,15 +1,17 @@
 class Coins extends MovableObject {
-    direction = -1
-    rotationTimer;
+
     width = 100;
     height = 100;
 
-
+    IMAGES = [
+        'img/8.Coin/Moneda1.png',
+        'img/8.Coin/Moneda2.png'
+    ]
 
 
     constructor() {
-        super().loadImage('img/8.Coin/Moneda1.png')
-
+        super().loadImage('img/8.Coin/Moneda1.png');
+        this.loadImages(this.IMAGES);
         this.y = 50 + Math.random() * 100;
         this.x = 500 + Math.random() * 1200;
         this.animate();
@@ -17,11 +19,9 @@ class Coins extends MovableObject {
 
 
     animate() {
-        this.rotationTimer = setInterval(() => {
-            this.width += 1 * this.direction;
-            if (this.width == 0) { this.direction *= -1 }
-            if (this.width == 100) { this.direction *= -1 }
-        })
+        setInterval(() => {
+            this.playAnimation(this.IMAGES);
+        }, 400);
     }
 
 }

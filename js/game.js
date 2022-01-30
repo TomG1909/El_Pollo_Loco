@@ -1,25 +1,44 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let gameRunning = false;
+let reloading = false;
 
 
 
 
 function init() {
+    if (!gameRunning) {
+        document.getElementById('btn').blur(); // take keybord focus from Button
+        document.getElementById('btn').classList.add('d-none');
+        document.getElementById('start').classList.add('d-none');
+        document.getElementById('canvas').classList.remove('d-none');
 
 
-    canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
-
+        canvas = document.getElementById('canvas');
+        world = new World(canvas, keyboard);
+        gameRunning = true;
+    }
     console.log('My character is', world.character);
 
 }
 
-function startGame() {
-    document.getElementById('start').classList.add('d-none');
-    document.getElementById('canvas').classList.remove('d-none');
+function reloadGame() {
+    if (!this.reloading) {
+        this.reloading = true;
+        location.reload();
+    }
+}
 
-
+function fullScreen() {
+    screen = document.getElementById("canvas")
+    if (!screen.fullscreenElement) {
+        screen.requestFullscreen()
+    } else {
+        {
+            screen.exitFullscreen()
+        }
+    }
 
 }
 

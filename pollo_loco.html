@@ -32,7 +32,6 @@
     <script src="models/keybord.class.js"></script>
     <script src="models/level.class.js"></script>
     <script src="models/endboss.class.js"></script>
-    <script src="models/small-chicken.class.js"></script>
     <script src="levels/level1.js"></script>
     <script src="js/game.js"></script>
     <script src="models/endscreen.class.js"></script>
@@ -42,14 +41,18 @@
     <title>El Pollo Loco</title>
 </head>
 
-<body onload="init()">
+<body>
     <h1>El Pollo Loco</h1>
-    <div><button onclick="startGame()">Start</button></div>
+    <div><button id="btn" onclick="init()">Start</button></div>
+    <div><button class="d-none" id="btn-replay" onclick="reloadGame()">Replay</button></div>
 
-    <div><img src="img/9.Intro _ Outro Image/Start Screen/Opción 1.png" id="start"></div>
-    <canvas id="canvas" width="720" height="480" class="d-none">
 
-    </canvas>
+    <div><img src="img/9.Intro _ Outro Image/Start Screen/Opción 1.png" id="start"> </div>
+
+
+
+    <canvas id="canvas" width="720" height="480" class="d-none"></canvas>
+    <div class="container-fullscreen"><img src="img/10.keyboard/fullscreen.png" class="btn-fullscreen" onclick="fullScreen()"></div>
     <div class="instruction-box">
         <div>
             <div class="flex-center">

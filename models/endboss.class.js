@@ -40,6 +40,7 @@ class Endboss extends MovableObject {
 
         this.x = 4800;
         this.animate();
+
     }
 
 
@@ -54,6 +55,7 @@ class Endboss extends MovableObject {
                 if (this.bossDefeatedAt > 0) {
                     let timepassed = new Date().getTime() - this.bossDefeatedAt
                     this.y = this.y + timepassed + 50
+                    document.getElementById('btn-replay').classList.remove('d-none')
 
                 }
             } else if (this.isHurt()) {

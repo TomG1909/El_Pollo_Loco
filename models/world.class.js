@@ -11,15 +11,16 @@ class World {
     statusBarCoins = new StatusBarCoins();
     statusBarEnemy = new StatusBarEnemy()
     throwableObjects = [];
+    throwableChickens = [];
     endscreen = new Endscreen();
     winscreen = new WinnerScreen();
-    EnemyIsAlive = true;
     endboss = level1.endboss[0];
     iconEnemyBar = new IconEnemyBar();
-
+    reloading = false;
     bottle_sound = new Audio('audio/bottle.mp3');
     coin_sound = new Audio('audio/coins.mp3');
     chicken_sound = new Audio('audio/chicken.mp3');
+
 
 
 
@@ -31,6 +32,10 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
+        this.shootChicken();
+
+
+
 
     }
 
@@ -48,12 +53,16 @@ class World {
             this.checkCollectedCoins();
             this.checkCollisionsEnemies();
             this.hurtBoss();
+            this.hurtCharacter();
+
+
 
         }, 200);
+
     }
 
     checkThrowObjects() {
-        if (this.keyboard.D && this.character.collectedBottles > 0 && !this.endboss.isHurt()) {
+        if (this.keyboard.D && this.character.collectedBottles > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 120);
             this.throwableObjects.push(bottle);
             this.character.collectedBottles -= 1;
@@ -63,6 +72,24 @@ class World {
         }
     }
 
+    bossAttack() {
+
+        if (this.character.x > 4000) {
+            let chicken = new ThrowableChicken(this.endboss.x + 100 + (Math.random() * 200), this.endboss.y + 220);
+            this.throwableChickens.push(chicken);
+
+        }
+    }
+
+    shootChicken() {
+
+        this.bossAttack();
+        let time = 1000 * Math.random();
+        setTimeout(() => {
+            this.shootChicken();
+        }, time)
+
+    }
 
     checkCollisionsEnemies() {
 
@@ -86,18 +113,33 @@ class World {
     }
     hurtBoss() {
         this.throwableObjects.forEach((bottle, index) => {
-            if (this.endboss.isColliding(bottle) && !this.endboss.isHurt()) {
+            if (this.endboss.isColliding(bottle) && !this.endboss.isDead()) {
                 this.endboss.hit();
                 this.chicken_sound.play();
                 this.throwableObjects.splice(index, 1);
                 this.statusBarEnemy.setPercentage(this.endboss.energy);
-                console.log('Boss energy', this.endboss.energy);
 
+            } else if (this.endboss.passedTimeDeath()) {
+                setTimeout(() => {
+                    this.gameEnds()
+                }, 1000);
 
+            }
+
+        });
+    }
+
+    hurtCharacter() {
+        this.throwableChickens.forEach((chicken) => {
+            if (this.character.isColliding(chicken) && !this.character.isDead()) {
+                this.character.hit();
+
+                this.statusBar.setPercentage(this.character.energy);
             }
 
 
         });
+
     }
 
 
@@ -120,7 +162,6 @@ class World {
         this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin) && this.character.isAboveGround()) {
                 this.character.countCoins();
-                clearInterval(this.rotationTimer)
                 this.coin_sound.play();
                 this.statusBarCoins.setPercentage(this.character.coins)
                 this.level.coins.splice(index, 1)
@@ -134,6 +175,15 @@ class World {
 
 
 
+    gameEnds() {
+
+        document.getElementById('btn-replay').classList.remove('d-none');
+
+
+    }
+
+
+
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -141,9 +191,15 @@ class World {
 
         if (this.character.isDead()) {
             this.addToMap(this.endscreen);
-            if (this.endboss.isDead()) {
-                this.addToMap(this.winscreen);
-            }
+        } else if (this.endboss.passedTimeDeath()) {
+
+            this.addToMap(this.winscreen);
+
+
+
+
+
+
         } else {
             this.ctx.translate(this.camera_x, 0);
             this.addObjectsToMap(this.level.backgroundObjects);
@@ -176,6 +232,7 @@ class World {
             this.addObjectsToMap(this.level.coins);
             this.addToMap(this.character);
             this.addObjectsToMap(this.throwableObjects);
+            this.addObjectsToMap(this.throwableChickens);
             this.ctx.translate(-this.camera_x, 0);
 
 
